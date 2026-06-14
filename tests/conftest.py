@@ -10,6 +10,8 @@ def driver():
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+        # Указываем путь к Chromium (который мы установили в CI)
+        options.binary_location = "/usr/bin/chromium-browser"
     driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(5)
     yield driver
@@ -17,5 +19,4 @@ def driver():
 
 @pytest.fixture
 def base_url():
-    # В CI сервер будет поднят на порту 8000
     return "http://localhost:8000/?balance=30000&reserved=20001"
